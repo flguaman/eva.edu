@@ -23,6 +23,7 @@ import {
   LogOut,
 } from "lucide-react"
 import { StudentReportsGenerator } from "@/components/student-reports-generator"
+import { InteractiveCalendar } from "@/components/interactive-calendar"
 import { ThemeSelector } from "@/components/theme-selector"
 import { useRouter } from "next/navigation"
 import {
@@ -63,16 +64,16 @@ export default function TeacherDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background bg-gradient-to-br from-primary/25 via-transparent to-secondary/25">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-card bg-gradient-to-r from-primary/25 via-transparent to-secondary/25 shadow-sm border-b border-primary/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <BookOpen className="h-8 w-8 text-blue-600" />
+              <BookOpen className="h-8 w-8 text-primary" />
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Panel del Profesor</h1>
-                <p className="text-sm text-gray-600">Prof. Roberto García - Matemáticas</p>
+                <h1 className="text-xl font-bold text-foreground">Panel del Profesor</h1>
+                <p className="text-sm text-muted-foreground">Prof. Roberto García - Matemáticas</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -117,14 +118,49 @@ export default function TeacherDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="overview">Resumen</TabsTrigger>
-            <TabsTrigger value="classes">Clases</TabsTrigger>
-            <TabsTrigger value="assignments">Tareas</TabsTrigger>
-            <TabsTrigger value="grades">Calificaciones</TabsTrigger>
-            <TabsTrigger value="resources">Recursos</TabsTrigger>
-            <TabsTrigger value="schedule">Horario</TabsTrigger>
-            <TabsTrigger value="reports">Reportes</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-7 bg-primary/10 border border-primary/25 shadow-sm">
+            <TabsTrigger
+              value="overview"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Resumen
+            </TabsTrigger>
+            <TabsTrigger
+              value="classes"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Clases
+            </TabsTrigger>
+            <TabsTrigger
+              value="assignments"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Tareas
+            </TabsTrigger>
+            <TabsTrigger
+              value="grades"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Calificaciones
+            </TabsTrigger>
+            <TabsTrigger
+              value="resources"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Recursos
+            </TabsTrigger>
+            <TabsTrigger
+              value="schedule"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Horario
+            </TabsTrigger>
+            <TabsTrigger
+              value="reports"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Reportes
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -136,7 +172,7 @@ export default function TeacherDashboard() {
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-blue-600">83</div>
+                  <div className="text-2xl font-bold text-primary">83</div>
                   <p className="text-xs text-muted-foreground">En 3 cursos</p>
                 </CardContent>
               </Card>
@@ -146,7 +182,7 @@ export default function TeacherDashboard() {
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-orange-600">12</div>
+                  <div className="text-2xl font-bold text-secondary">12</div>
                   <p className="text-xs text-muted-foreground">Por revisar</p>
                 </CardContent>
               </Card>
@@ -156,7 +192,7 @@ export default function TeacherDashboard() {
                   <BookOpen className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-green-600">8.4</div>
+                  <div className="text-2xl font-bold text-accent">8.4</div>
                   <p className="text-xs text-muted-foreground">Todos los cursos</p>
                 </CardContent>
               </Card>
@@ -166,7 +202,7 @@ export default function TeacherDashboard() {
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-purple-600">10mo A</div>
+                  <div className="text-2xl font-bold text-primary">10mo A</div>
                   <p className="text-xs text-muted-foreground">En 2 horas</p>
                 </CardContent>
               </Card>
@@ -184,13 +220,13 @@ export default function TeacherDashboard() {
                     <div key={assignment.id} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
                         <h4 className="font-medium">{assignment.title}</h4>
-                        <p className="text-sm text-gray-600">{assignment.class}</p>
+                        <p className="text-sm text-muted-foreground">{assignment.class}</p>
                       </div>
                       <div className="text-right">
                         <Badge variant="secondary">
                           {assignment.submitted}/{assignment.total}
                         </Badge>
-                        <p className="text-xs text-gray-500 mt-1">Vence: {assignment.dueDate}</p>
+                        <p className="text-xs text-muted-foreground mt-1">Vence: {assignment.dueDate}</p>
                       </div>
                     </div>
                   ))}
@@ -207,7 +243,7 @@ export default function TeacherDashboard() {
                     <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
                         <h4 className="font-medium">{grade.student}</h4>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           {grade.assignment} - {grade.class}
                         </p>
                       </div>
@@ -321,11 +357,11 @@ export default function TeacherDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   {assignments.map((assignment) => (
-                    <div key={assignment.id} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div key={assignment.id} className="flex items-center justify-between p-4 border border-border rounded-lg bg-card">
                       <div>
                         <h4 className="font-medium">{assignment.title}</h4>
-                        <p className="text-sm text-gray-600">{assignment.class}</p>
-                        <p className="text-xs text-gray-500">Vence: {assignment.dueDate}</p>
+                        <p className="text-sm text-muted-foreground">{assignment.class}</p>
+                        <p className="text-xs text-muted-foreground">Vence: {assignment.dueDate}</p>
                       </div>
                       <div className="flex items-center space-x-4">
                         <div className="text-right">
@@ -368,37 +404,37 @@ export default function TeacherDashboard() {
                     </Button>
                   </div>
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse border border-gray-300">
+                    <table className="w-full border-collapse border border-border">
                       <thead>
-                        <tr className="bg-gray-50">
-                          <th className="border border-gray-300 p-2 text-left">Estudiante</th>
-                          <th className="border border-gray-300 p-2 text-center">Parcial 1</th>
-                          <th className="border border-gray-300 p-2 text-center">Parcial 2</th>
-                          <th className="border border-gray-300 p-2 text-center">Tareas</th>
-                          <th className="border border-gray-300 p-2 text-center">Promedio</th>
+                        <tr className="bg-muted">
+                          <th className="border border-border p-2 text-left text-muted-foreground">Estudiante</th>
+                          <th className="border border-border p-2 text-center text-muted-foreground">Parcial 1</th>
+                          <th className="border border-border p-2 text-center text-muted-foreground">Parcial 2</th>
+                          <th className="border border-border p-2 text-center text-muted-foreground">Tareas</th>
+                          <th className="border border-border p-2 text-center text-muted-foreground">Promedio</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td className="border border-gray-300 p-2">María González</td>
-                          <td className="border border-gray-300 p-2 text-center">8.5</td>
-                          <td className="border border-gray-300 p-2 text-center">9.0</td>
-                          <td className="border border-gray-300 p-2 text-center">8.8</td>
-                          <td className="border border-gray-300 p-2 text-center font-medium">8.8</td>
+                          <td className="border border-border p-2">María González</td>
+                          <td className="border border-border p-2 text-center">8.5</td>
+                          <td className="border border-border p-2 text-center">9.0</td>
+                          <td className="border border-border p-2 text-center">8.8</td>
+                          <td className="border border-border p-2 text-center font-medium">8.8</td>
                         </tr>
                         <tr>
-                          <td className="border border-gray-300 p-2">Carlos Pérez</td>
-                          <td className="border border-gray-300 p-2 text-center">7.5</td>
-                          <td className="border border-gray-300 p-2 text-center">8.2</td>
-                          <td className="border border-gray-300 p-2 text-center">9.0</td>
-                          <td className="border border-gray-300 p-2 text-center font-medium">8.2</td>
+                          <td className="border border-border p-2">Carlos Pérez</td>
+                          <td className="border border-border p-2 text-center">7.5</td>
+                          <td className="border border-border p-2 text-center">8.2</td>
+                          <td className="border border-border p-2 text-center">9.0</td>
+                          <td className="border border-border p-2 text-center font-medium">8.2</td>
                         </tr>
                         <tr>
-                          <td className="border border-gray-300 p-2">Ana Rodríguez</td>
-                          <td className="border border-gray-300 p-2 text-center">9.2</td>
-                          <td className="border border-gray-300 p-2 text-center">8.8</td>
-                          <td className="border border-gray-300 p-2 text-center">9.5</td>
-                          <td className="border border-gray-300 p-2 text-center font-medium">9.2</td>
+                          <td className="border border-border p-2">Ana Rodríguez</td>
+                          <td className="border border-border p-2 text-center">9.2</td>
+                          <td className="border border-border p-2 text-center">8.8</td>
+                          <td className="border border-border p-2 text-center">9.5</td>
+                          <td className="border border-border p-2 text-center font-medium">9.2</td>
                         </tr>
                       </tbody>
                     </table>
@@ -490,53 +526,7 @@ export default function TeacherDashboard() {
           </TabsContent>
 
           <TabsContent value="schedule" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Mi Horario de Clases</CardTitle>
-                <CardDescription>Horario semanal de todas tus clases</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-6 gap-4 text-sm">
-                  <div className="font-medium">Hora</div>
-                  <div className="font-medium text-center">Lunes</div>
-                  <div className="font-medium text-center">Martes</div>
-                  <div className="font-medium text-center">Miércoles</div>
-                  <div className="font-medium text-center">Jueves</div>
-                  <div className="font-medium text-center">Viernes</div>
-
-                  <div className="font-medium">07:00-07:45</div>
-                  <div className="text-center p-2 bg-blue-50 rounded">10mo A</div>
-                  <div className="text-center p-2 bg-green-50 rounded">9no B</div>
-                  <div className="text-center p-2 bg-blue-50 rounded">10mo A</div>
-                  <div className="text-center p-2 bg-purple-50 rounded">8vo C</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Libre</div>
-
-                  <div className="font-medium">07:45-08:30</div>
-                  <div className="text-center p-2 bg-green-50 rounded">9no B</div>
-                  <div className="text-center p-2 bg-blue-50 rounded">10mo A</div>
-                  <div className="text-center p-2 bg-purple-50 rounded">8vo C</div>
-                  <div className="text-center p-2 bg-green-50 rounded">9no B</div>
-                  <div className="text-center p-2 bg-purple-50 rounded">8vo C</div>
-
-                  <div className="font-medium">08:30-09:15</div>
-                  <div className="text-center p-2 bg-purple-50 rounded">8vo C</div>
-                  <div className="text-center p-2 bg-purple-50 rounded">8vo C</div>
-                  <div className="text-center p-2 bg-green-50 rounded">9no B</div>
-                  <div className="text-center p-2 bg-blue-50 rounded">10mo A</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Reunión</div>
-
-                  <div className="font-medium">09:15-09:30</div>
-                  <div className="text-center p-2 bg-gray-100 rounded col-span-5">RECREO</div>
-
-                  <div className="font-medium">09:30-10:15</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Preparación</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Preparación</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Preparación</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Preparación</div>
-                  <div className="text-center p-2 bg-gray-100 rounded">Preparación</div>
-                </div>
-              </CardContent>
-            </Card>
+            <InteractiveCalendar />
           </TabsContent>
 
           <TabsContent value="reports" className="space-y-6">

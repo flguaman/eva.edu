@@ -7,9 +7,9 @@ import { ThemeProvider } from "@/contexts/theme-context"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "EVA Ecuador - Plataforma Educativa",
+  title: "EDU Ecuador - Plataforma Educativa",
   description: "Sistema de gestión educativa integral para colegios en Ecuador",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({

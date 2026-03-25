@@ -37,28 +37,35 @@ interface CalendarEvent {
 }
 
 export function InteractiveCalendar() {
-  const [currentDate, setCurrentDate] = useState(new Date())
+  // Demo: for the 2026 demo month, always start on March 2026.
+  const demoMonth = new Date(2026, 2, 1) // Marzo 2026
+  const [currentDate, setCurrentDate] = useState(demoMonth)
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const [isAddEventOpen, setIsAddEventOpen] = useState(false)
   const [viewMode, setViewMode] = useState<"month" | "week" | "day">("month")
 
+  const currentYear = demoMonth.getFullYear()
+  const currentMonth = demoMonth.getMonth()
+
+  // Eventos clave del mes (incluye fechas atrasadas: 3, 10, 15, 20, 28)
   const [events, setEvents] = useState<CalendarEvent[]>([
     {
       id: "1",
       title: "Examen de Matemáticas",
       description: "Examen sobre ecuaciones cuadráticas y funciones",
-      date: new Date(2024, 0, 25),
+      date: new Date(currentYear, currentMonth, 20),
       time: "08:00",
       type: "exam",
       subject: "Matemáticas",
       location: "Aula 201",
       priority: "high",
+      completed: false,
     },
     {
       id: "2",
       title: "Entrega de Ensayo",
       description: "Ensayo sobre la Independencia del Ecuador",
-      date: new Date(2024, 0, 28),
+      date: new Date(currentYear, currentMonth, 10),
       time: "23:59",
       type: "assignment",
       subject: "Historia",
@@ -67,22 +74,36 @@ export function InteractiveCalendar() {
     },
     {
       id: "3",
-      title: "Feria de Ciencias",
-      description: "Presentación de proyectos científicos",
-      date: new Date(2024, 0, 30),
+      title: "Proyecto de Ciencias",
+      description: "Presentación del proyecto en la feria de ciencias",
+      date: new Date(currentYear, currentMonth, 3),
       time: "14:00",
       type: "event",
       location: "Auditorio Principal",
-      priority: "medium",
+      priority: "high",
+      completed: false,
     },
     {
       id: "4",
+      title: "Clase de Física",
+      description: "Laboratorio práctico de fuerzas",
+      date: new Date(currentYear, currentMonth, 15),
+      time: "09:00",
+      type: "class",
+      subject: "Física",
+      location: "Laboratorio 2",
+      priority: "medium",
+      completed: false,
+    },
+    {
+      id: "5",
       title: "Día del Estudiante",
-      description: "Celebración del Día del Estudiante",
-      date: new Date(2024, 1, 14),
+      description: "Actividad especial y descanso",
+      date: new Date(currentYear, currentMonth, 28),
       time: "Todo el día",
       type: "holiday",
       priority: "low",
+      completed: false,
     },
   ])
 
@@ -194,9 +215,8 @@ export function InteractiveCalendar() {
       days.push(
         <div
           key={day}
-          className={`h-24 p-1 border border-border cursor-pointer hover:bg-secondary/50 transition-colors ${
-            isToday ? "bg-primary/10 border-primary/30" : ""
-          } ${isSelected ? "bg-primary/20 border-primary" : ""}`}
+          className={`h-24 p-1 border border-border cursor-pointer hover:bg-secondary/50 transition-colors ${isToday ? "bg-primary/10 border-primary/30" : ""
+            } ${isSelected ? "bg-primary/20 border-primary" : ""}`}
           onClick={() => setSelectedDate(date)}
         >
           <div className={`text-sm font-medium mb-1 ${isToday ? "text-primary" : ""}`}>{day}</div>

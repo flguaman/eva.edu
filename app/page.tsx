@@ -14,13 +14,10 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center space-x-3">
-                <div className="relative">
-                  <BookOpen className="h-10 w-10 text-primary" />
-                  <Sparkles className="h-4 w-4 text-primary absolute -top-1 -right-1" />
-                </div>
+
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                    EVA Ecuador
+                  <h1 className="text-2xl font-bold text-black">
+                    Ministerio de Educación
                   </h1>
                   <p className="text-xs text-muted-foreground">Plataforma Educativa Virtual</p>
                 </div>
@@ -44,18 +41,20 @@ export default function HomePage() {
         <section className="py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
-              <Zap className="h-4 w-4 mr-2" />
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-black text-sm font-medium mb-8">
+              <Zap className="h-4 w-4 mr-2 text-black" />
               Nueva Generación de Educación Digital
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Transformando la
-              <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent block">
-                Educación en Ecuador
-              </span>
-            </h2>
+            <div className="flex items-baseline justify-center gap-4 mb-6">
+              <div className="relative">
+                <BookOpen className="h-[100px] w-[100px] text-black" />
+              </div>
+              <h2 className="text-10 xl md:text-9xl font-bold text-foreground leading-tight">
+                EDU
+              </h2>
+            </div>
             <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-              EVA conecta estudiantes, profesores y administradores en un entorno digital innovador, diseñado
+              EDU conecta estudiantes, profesores y administradores en un entorno digital innovador, diseñado
               específicamente para potenciar el aprendizaje en el sistema educativo ecuatoriano.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -65,11 +64,7 @@ export default function HomePage() {
                   Explorar Demo
                 </Button>
               </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="outline" className="hover-lift text-lg px-8 py-6 bg-transparent">
-                  Contactar Ventas
-                </Button>
-              </Link>
+
             </div>
           </div>
         </section>
@@ -190,7 +185,7 @@ export default function HomePage() {
               <Shield className="h-16 w-16 text-primary mx-auto mb-6" />
               <h3 className="text-3xl font-bold text-foreground mb-4">¿Listo para Revolucionar tu Institución?</h3>
               <p className="text-xl text-muted-foreground mb-8">
-                Únete a cientos de colegios que ya están transformando la educación con EVA Ecuador
+                Únete a cientos de colegios que ya están transformando la educación con EDU Ecuador
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Button size="lg" className="hover-lift modern-shadow">
@@ -211,7 +206,7 @@ export default function HomePage() {
               <div>
                 <div className="flex items-center space-x-2 mb-6">
                   <BookOpen className="h-8 w-8 text-primary" />
-                  <span className="text-xl font-bold text-foreground">EVA Ecuador</span>
+                  <span className="text-xl font-bold text-foreground">EDU Ecuador</span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
                   Transformando la educación en Ecuador a través de la innovación tecnológica y la excelencia académica.
@@ -289,7 +284,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="border-t border-border mt-12 pt-8 text-center text-muted-foreground">
-              <p>&copy; 2024 EVA Ecuador. Todos los derechos reservados. Hecho con ❤️ para la educación ecuatoriana.</p>
+              <p>&copy; 2024 EDU Ecuador. Todos los derechos reservados. Hecho con ❤️ para la educación ecuatoriana.</p>
             </div>
           </div>
         </footer>

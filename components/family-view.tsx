@@ -124,7 +124,7 @@ export function FamilyView() {
 
   const downloadFamilyReport = () => {
     const reportContent = `VISTA FAMILIAR - REPORTE INTEGRAL
-Colegio EVA Ecuador
+Colegio EDU Ecuador
 Fecha: ${new Date().toLocaleDateString("es-ES")}
 
 INFORMACIÓN DEL ESTUDIANTE
@@ -140,11 +140,11 @@ Posición en el curso: ${studentData.academic.ranking} de ${studentData.academic
 
 Calificaciones por Materia:
 ${studentData.academic.subjects
-  .map(
-    (subject) =>
-      `- ${subject.name}: ${subject.grade}/10 (${subject.trend === "up" ? "↗️" : subject.trend === "down" ? "↘️" : "→"})`,
-  )
-  .join("\n")}
+        .map(
+          (subject) =>
+            `- ${subject.name}: ${subject.grade}/10 (${subject.trend === "up" ? "↗️" : subject.trend === "down" ? "↘️" : "→"})`,
+        )
+        .join("\n")}
 
 ASISTENCIA
 ===========================================
@@ -170,8 +170,8 @@ Tareas Pendientes: ${studentData.assignments.pendingAssignments}
 
 Próximas Entregas:
 ${studentData.assignments.upcomingDeadlines
-  .map((deadline) => `- ${deadline.subject}: ${deadline.assignment} (${deadline.dueDate})`)
-  .join("\n")}
+        .map((deadline) => `- ${deadline.subject}: ${deadline.assignment} (${deadline.dueDate})`)
+        .join("\n")}
 
 ESTADO FINANCIERO
 ===========================================
@@ -179,8 +179,8 @@ Saldo Actual: $${studentData.financial.balance.toFixed(2)}
 
 Pagos Pendientes:
 ${studentData.financial.pendingPayments
-  .map((payment) => `- ${payment.concept}: $${payment.amount.toFixed(2)} (Vence: ${payment.dueDate})`)
-  .join("\n")}
+        .map((payment) => `- ${payment.concept}: $${payment.amount.toFixed(2)} (Vence: ${payment.dueDate})`)
+        .join("\n")}
 
 INFORMACIÓN DE SALUD
 ===========================================
@@ -195,7 +195,7 @@ PRÓXIMOS EVENTOS
 ${studentData.calendar.upcomingEvents.map((event) => `- ${event.title} (${event.date})`).join("\n")}
 
 ===========================================
-Reporte generado por EVA Ecuador
+Reporte generado por EDU Ecuador
 Sistema de Gestión Educativa Integral
 `
 
@@ -287,13 +287,12 @@ Sistema de Gestión Educativa Integral
                     </div>
                     <div className="flex items-center space-x-3">
                       <TrendingUp
-                        className={`h-4 w-4 ${
-                          subject.trend === "up"
+                        className={`h-4 w-4 ${subject.trend === "up"
                             ? "text-green-600"
                             : subject.trend === "down"
                               ? "text-red-600"
                               : "text-gray-600"
-                        }`}
+                          }`}
                       />
                       <Badge
                         variant={subject.grade >= 9 ? "default" : subject.grade >= 7 ? "secondary" : "destructive"}
@@ -381,9 +380,8 @@ Sistema de Gestión Educativa Integral
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star
                       key={star}
-                      className={`h-6 w-6 ${
-                        star <= studentData.behavior.overallRating ? "text-yellow-400 fill-current" : "text-gray-300"
-                      }`}
+                      className={`h-6 w-6 ${star <= studentData.behavior.overallRating ? "text-yellow-400 fill-current" : "text-gray-300"
+                        }`}
                     />
                   ))}
                 </div>
@@ -405,9 +403,8 @@ Sistema de Gestión Educativa Integral
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star
                         key={star}
-                        className={`h-4 w-4 ${
-                          star <= studentData.behavior.socialSkills ? "text-yellow-400 fill-current" : "text-gray-300"
-                        }`}
+                        className={`h-4 w-4 ${star <= studentData.behavior.socialSkills ? "text-yellow-400 fill-current" : "text-gray-300"
+                          }`}
                       />
                     ))}
                   </div>
@@ -418,9 +415,8 @@ Sistema de Gestión Educativa Integral
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star
                         key={star}
-                        className={`h-4 w-4 ${
-                          star <= studentData.behavior.responsibility ? "text-yellow-400 fill-current" : "text-gray-300"
-                        }`}
+                        className={`h-4 w-4 ${star <= studentData.behavior.responsibility ? "text-yellow-400 fill-current" : "text-gray-300"
+                          }`}
                       />
                     ))}
                   </div>
@@ -431,9 +427,8 @@ Sistema de Gestión Educativa Integral
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star
                         key={star}
-                        className={`h-4 w-4 ${
-                          star <= studentData.behavior.respect ? "text-yellow-400 fill-current" : "text-gray-300"
-                        }`}
+                        className={`h-4 w-4 ${star <= studentData.behavior.respect ? "text-yellow-400 fill-current" : "text-gray-300"
+                          }`}
                       />
                     ))}
                   </div>
@@ -444,9 +439,8 @@ Sistema de Gestión Educativa Integral
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star
                         key={star}
-                        className={`h-4 w-4 ${
-                          star <= studentData.behavior.participation ? "text-yellow-400 fill-current" : "text-gray-300"
-                        }`}
+                        className={`h-4 w-4 ${star <= studentData.behavior.participation ? "text-yellow-400 fill-current" : "text-gray-300"
+                          }`}
                       />
                     ))}
                   </div>
@@ -535,9 +529,8 @@ Sistema de Gestión Educativa Integral
           <Card>
             <CardHeader className="text-center">
               <CardTitle
-                className={`text-3xl font-bold ${
-                  studentData.financial.balance >= 0 ? "text-green-600" : "text-red-600"
-                }`}
+                className={`text-3xl font-bold ${studentData.financial.balance >= 0 ? "text-green-600" : "text-red-600"
+                  }`}
               >
                 ${Math.abs(studentData.financial.balance).toFixed(2)}
               </CardTitle>

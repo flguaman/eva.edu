@@ -19,7 +19,7 @@ export function EventsCard() {
         <h2 className="text-lg font-semibold">Próximos Eventos</h2>
         {upcomingEvents.length > 0 ? (
           upcomingEvents.map((event) => (
-            <p key={event.id} className="text-sm">{event.description}</p>
+          <p key={event.id} className="text-sm">{event.description}</p>
           ))
         ) : (
           <p className="text-sm text-gray-500">No hay eventos próximos</p>

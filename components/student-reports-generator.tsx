@@ -98,7 +98,7 @@ export function StudentReportsGenerator() {
     const selectedStudentData = students.filter((s) => selectedStudents.includes(s.id))
 
     let content = `REPORTE ACADÉMICO INTEGRAL
-Colegio EVA Ecuador
+Colegio EDU Ecuador
 Fecha de generación: ${new Date().toLocaleDateString("es-ES")}
 Profesor: Roberto García - Matemáticas
 
@@ -199,7 +199,7 @@ PRÓXIMOS PASOS
 3. Seguimiento individualizado de estudiantes con necesidades específicas
 
 ===========================================
-Reporte generado automáticamente por EVA Ecuador
+Reporte generado automáticamente por EDU Ecuador
 Sistema de Gestión Educativa Integral
 © 2024 - Todos los derechos reservados
 `
@@ -419,9 +419,8 @@ Sistema de Gestión Educativa Integral
                   {students.map((student) => (
                     <div
                       key={student.id}
-                      className={`flex items-center justify-between p-3 border rounded-lg cursor-pointer transition-colors ${
-                        selectedStudents.includes(student.id) ? "border-blue-500 bg-blue-50" : "hover:bg-gray-50"
-                      }`}
+                      className={`flex items-center justify-between p-3 border rounded-lg cursor-pointer transition-colors ${selectedStudents.includes(student.id) ? "border-blue-500 bg-blue-50" : "hover:bg-gray-50"
+                        }`}
                       onClick={() => handleStudentToggle(student.id)}
                     >
                       <div className="flex items-center space-x-3">

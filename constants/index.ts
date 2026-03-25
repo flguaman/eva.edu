@@ -209,11 +209,11 @@ export const TIME_ZONES = {
 
 // ========== STORAGE KEYS ==========
 export const STORAGE_KEYS = {
-  THEME: 'eva-theme',
-  USER: 'eva-user',
-  TOKEN: 'eva-token',
-  REFRESH_TOKEN: 'eva-refresh-token',
-  SETTINGS: 'eva-settings'
+  THEME: 'edu-theme',
+  USER: 'edu-user',
+  TOKEN: 'edu-token',
+  REFRESH_TOKEN: 'edu-refresh-token',
+  SETTINGS: 'edu-settings'
 } as const;
 
 // ========== ERROR MESSAGES ==========

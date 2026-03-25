@@ -240,7 +240,7 @@ export function DigitalLibrary() {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <BookOpen className="h-6 w-6 text-primary" />
-            <span>Biblioteca Digital EVA</span>
+            <span>Biblioteca Digital EDU</span>
           </CardTitle>
         </CardHeader>
         <CardContent>

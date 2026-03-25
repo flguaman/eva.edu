@@ -42,7 +42,7 @@ export default function RegisterPage() {
           <div className="flex justify-center mb-4">
             <BookOpen className="h-12 w-12 text-blue-600" />
           </div>
-          <CardTitle className="text-2xl">Registro en EVA Ecuador</CardTitle>
+          <CardTitle className="text-2xl">Registro en EDU Ecuador</CardTitle>
           <CardDescription>Crea tu cuenta para acceder a la plataforma educativa</CardDescription>
         </CardHeader>
         <CardContent>

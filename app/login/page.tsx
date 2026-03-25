@@ -65,7 +65,7 @@ export default function LoginPage() {
               </div>
             </div>
             <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Bienvenido a EVA
+              Bienvenido a EDU
             </CardTitle>
             <CardDescription className="text-base mt-2">
               Accede a tu cuenta para continuar con tus actividades académicas

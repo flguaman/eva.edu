@@ -29,7 +29,7 @@ export default function StudentDashboard() {
 
   // Datos simulados del estudiante
   const studentData = {
-    name: "María González",
+    name: "Freddy Guaman",
     grade: "10mo A",
     studentId: "2024-001",
     photo: "/placeholder.svg?height=100&width=100&text=MG",
@@ -72,20 +72,20 @@ export default function StudentDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background bg-gradient-to-br from-primary/25 via-transparent to-secondary/25">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-card bg-gradient-to-r from-primary/25 via-transparent to-secondary/25 shadow-sm border-b border-primary/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
               <img
                 src={studentData.photo || "/placeholder.svg"}
                 alt={studentData.name}
-                className="w-10 h-10 rounded-full border-2 border-blue-200"
+                className="w-10 h-10 rounded-full border-2 border-primary/30"
               />
               <div>
-                <h1 className="text-xl font-bold text-gray-900">¡Hola, {studentData.name}!</h1>
-                <p className="text-sm text-gray-600">
+                <h1 className="text-xl font-bold text-primary">¡Hola, {studentData.name}!</h1>
+                <p className="text-sm text-muted-foreground">
                   {studentData.grade} • Código: {studentData.studentId}
                 </p>
               </div>
@@ -94,7 +94,7 @@ export default function StudentDashboard() {
               <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-5 w-5" />
                 {studentData.notifications.length > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-destructive rounded-full text-xs text-destructive-foreground flex items-center justify-center">
                     {studentData.notifications.length}
                   </span>
                 )}
@@ -137,82 +137,127 @@ export default function StudentDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-9">
-            <TabsTrigger value="overview">Resumen</TabsTrigger>
-            <TabsTrigger value="grades">Calificaciones</TabsTrigger>
-            <TabsTrigger value="assignments">Tareas</TabsTrigger>
-            <TabsTrigger value="schedule">Horario</TabsTrigger>
-            <TabsTrigger value="library">Biblioteca</TabsTrigger>
-            <TabsTrigger value="analytics">Análisis</TabsTrigger>
-            <TabsTrigger value="gamification">Logros</TabsTrigger>
-            <TabsTrigger value="chat">Chat</TabsTrigger>
-            <TabsTrigger value="representative">Vista Representante</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-9 bg-primary/10 border border-primary/25 shadow-sm">
+            <TabsTrigger
+              value="overview"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Resumen
+            </TabsTrigger>
+            <TabsTrigger
+              value="grades"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Calificaciones
+            </TabsTrigger>
+            <TabsTrigger
+              value="assignments"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Tareas
+            </TabsTrigger>
+            <TabsTrigger
+              value="schedule"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Horario
+            </TabsTrigger>
+            <TabsTrigger
+              value="library"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Biblioteca
+            </TabsTrigger>
+            <TabsTrigger
+              value="analytics"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Análisis
+            </TabsTrigger>
+            <TabsTrigger
+              value="gamification"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Logros
+            </TabsTrigger>
+            <TabsTrigger
+              value="chat"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Chat
+            </TabsTrigger>
+            <TabsTrigger
+              value="representative"
+              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
+            >
+              Vista Representante
+            </TabsTrigger>
           </TabsList>
 
           {/* Resumen */}
           <TabsContent value="overview" className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card>
+              <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Promedio General</CardTitle>
-                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-semibold text-primary">Promedio General</CardTitle>
+                  <TrendingUp className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-blue-600">{studentData.stats.overallAverage}/10</div>
-                  <p className="text-xs text-muted-foreground">Excelente rendimiento</p>
+                  <div className="text-2xl font-bold text-chart-1">{studentData.stats.overallAverage}/10</div>
+                  <p className="text-xs text-primary/80">Excelente rendimiento</p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Asistencia</CardTitle>
-                  <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-semibold text-primary">Asistencia</CardTitle>
+                  <CheckCircle className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-green-600">{studentData.stats.attendance}%</div>
-                  <p className="text-xs text-muted-foreground">Muy buena asistencia</p>
+                  <div className="text-2xl font-bold text-chart-2">{studentData.stats.attendance}%</div>
+                  <p className="text-xs text-primary/80">Muy buena asistencia</p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Tareas Completadas</CardTitle>
-                  <FileText className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-semibold text-primary">Tareas Completadas</CardTitle>
+                  <FileText className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-purple-600">
+                  <div className="text-2xl font-bold text-chart-3">
                     {studentData.stats.completedAssignments}/{studentData.stats.totalAssignments}
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-primary/80">
                     {Math.round((studentData.stats.completedAssignments / studentData.stats.totalAssignments) * 100)}%
                     completado
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Ranking</CardTitle>
-                  <Trophy className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-semibold text-primary">Ranking</CardTitle>
+                  <Trophy className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-orange-600">#{studentData.stats.ranking}</div>
-                  <p className="text-xs text-muted-foreground">de {studentData.stats.totalStudents} estudiantes</p>
+                  <div className="text-2xl font-bold text-chart-4">#{studentData.stats.ranking}</div>
+                  <p className="text-xs text-primary/80">de {studentData.stats.totalStudents} estudiantes</p>
                 </CardContent>
               </Card>
             </div>
 
             {/* Recent Activity */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
                 <CardHeader>
-                  <CardTitle>Calificaciones Recientes</CardTitle>
-                  <CardDescription>Tus últimas evaluaciones</CardDescription>
+                  <CardTitle className="text-primary">Calificaciones Recientes</CardTitle>
+                  <CardDescription className="text-muted-foreground">Tus últimas evaluaciones</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {studentData.recentGrades.map((grade, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-primary/10 transition-colors">
                       <div>
                         <h4 className="font-medium">{grade.subject}</h4>
-                        <p className="text-sm text-gray-600">{grade.date}</p>
+                        <p className="text-sm text-muted-foreground">{grade.date}</p>
                       </div>
                       <Badge variant={grade.grade >= 9 ? "default" : grade.grade >= 7 ? "secondary" : "destructive"}>
                         {grade.grade}/10
@@ -222,17 +267,17 @@ export default function StudentDashboard() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
                 <CardHeader>
-                  <CardTitle>Próximas Entregas</CardTitle>
-                  <CardDescription>Tareas y proyectos pendientes</CardDescription>
+                  <CardTitle className="text-primary">Próximas Entregas</CardTitle>
+                  <CardDescription className="text-muted-foreground">Tareas y proyectos pendientes</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {studentData.upcomingAssignments.map((assignment, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-primary/10 transition-colors">
                       <div>
                         <h4 className="font-medium">{assignment.title}</h4>
-                        <p className="text-sm text-gray-600">{assignment.subject}</p>
+                        <p className="text-sm text-muted-foreground">{assignment.subject}</p>
                       </div>
                       <div className="text-right">
                         <Badge
@@ -250,7 +295,7 @@ export default function StudentDashboard() {
                               ? "Medio"
                               : "Bajo"}
                         </Badge>
-                        <p className="text-xs text-gray-500 mt-1">{assignment.dueDate}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{assignment.dueDate}</p>
                       </div>
                     </div>
                   ))}
@@ -259,22 +304,22 @@ export default function StudentDashboard() {
             </div>
 
             {/* Today's Schedule */}
-            <Card>
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
               <CardHeader>
-                <CardTitle>Horario de Hoy</CardTitle>
-                <CardDescription>Tus clases programadas para hoy</CardDescription>
+                <CardTitle className="text-primary">Horario de Hoy</CardTitle>
+                <CardDescription className="text-muted-foreground">Tus clases programadas para hoy</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {studentData.schedule.map((class_, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-primary/10 transition-colors">
                       <div className="flex items-center space-x-4">
                         <div className="text-center">
                           <p className="text-sm font-medium">{class_.time}</p>
                         </div>
                         <div>
                           <h4 className="font-medium">{class_.subject}</h4>
-                          <p className="text-sm text-gray-600">{class_.teacher}</p>
+                          <p className="text-sm text-muted-foreground">{class_.teacher}</p>
                         </div>
                       </div>
                       <Badge variant="outline">{class_.room}</Badge>
@@ -289,49 +334,49 @@ export default function StudentDashboard() {
           <TabsContent value="grades" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Mis Calificaciones</CardTitle>
+                <CardTitle className="text-primary">Mis Calificaciones</CardTitle>
                 <CardDescription>Historial completo de evaluaciones</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
-                  <table className="w-full border-collapse border border-gray-300">
+                  <table className="w-full border-collapse border border-border">
                     <thead>
-                      <tr className="bg-gray-50">
-                        <th className="border border-gray-300 p-2 text-left">Materia</th>
-                        <th className="border border-gray-300 p-2 text-center">Parcial 1</th>
-                        <th className="border border-gray-300 p-2 text-center">Parcial 2</th>
-                        <th className="border border-gray-300 p-2 text-center">Tareas</th>
-                        <th className="border border-gray-300 p-2 text-center">Promedio</th>
+                      <tr className="bg-primary/10">
+                        <th className="border border-border p-2 text-left text-sm font-semibold text-primary">Materia</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Parcial 1</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Parcial 2</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Tareas</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Promedio</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td className="border border-gray-300 p-2">Matemáticas</td>
-                        <td className="border border-gray-300 p-2 text-center">9.2</td>
-                        <td className="border border-gray-300 p-2 text-center">8.8</td>
-                        <td className="border border-gray-300 p-2 text-center">9.5</td>
-                        <td className="border border-gray-300 p-2 text-center font-medium">9.2</td>
+                      <tr className="hover:bg-primary/10 transition-colors">
+                        <td className="border border-border p-2">Matemáticas</td>
+                        <td className="border border-border p-2 text-center">9.2</td>
+                        <td className="border border-border p-2 text-center">8.8</td>
+                        <td className="border border-border p-2 text-center">9.5</td>
+                        <td className="border border-border p-2 text-center font-medium">9.2</td>
                       </tr>
-                      <tr>
-                        <td className="border border-gray-300 p-2">Ciencias</td>
-                        <td className="border border-gray-300 p-2 text-center">8.5</td>
-                        <td className="border border-gray-300 p-2 text-center">9.0</td>
-                        <td className="border border-gray-300 p-2 text-center">8.8</td>
-                        <td className="border border-gray-300 p-2 text-center font-medium">8.8</td>
+                      <tr className="hover:bg-primary/10 transition-colors">
+                        <td className="border border-border p-2">Ciencias</td>
+                        <td className="border border-border p-2 text-center">8.5</td>
+                        <td className="border border-border p-2 text-center">9.0</td>
+                        <td className="border border-border p-2 text-center">8.8</td>
+                        <td className="border border-border p-2 text-center font-medium">8.8</td>
                       </tr>
-                      <tr>
-                        <td className="border border-gray-300 p-2">Lenguaje</td>
-                        <td className="border border-gray-300 p-2 text-center">8.0</td>
-                        <td className="border border-gray-300 p-2 text-center">8.2</td>
-                        <td className="border border-gray-300 p-2 text-center">8.1</td>
-                        <td className="border border-gray-300 p-2 text-center font-medium">8.1</td>
+                      <tr className="hover:bg-primary/10 transition-colors">
+                        <td className="border border-border p-2">Lenguaje</td>
+                        <td className="border border-border p-2 text-center">8.0</td>
+                        <td className="border border-border p-2 text-center">8.2</td>
+                        <td className="border border-border p-2 text-center">8.1</td>
+                        <td className="border border-border p-2 text-center font-medium">8.1</td>
                       </tr>
-                      <tr>
-                        <td className="border border-gray-300 p-2">Historia</td>
-                        <td className="border border-gray-300 p-2 text-center">9.0</td>
-                        <td className="border border-gray-300 p-2 text-center">8.8</td>
-                        <td className="border border-gray-300 p-2 text-center">8.9</td>
-                        <td className="border border-gray-300 p-2 text-center font-medium">8.9</td>
+                      <tr className="hover:bg-primary/10 transition-colors">
+                        <td className="border border-border p-2">Historia</td>
+                        <td className="border border-border p-2 text-center">9.0</td>
+                        <td className="border border-border p-2 text-center">8.8</td>
+                        <td className="border border-border p-2 text-center">8.9</td>
+                        <td className="border border-border p-2 text-center font-medium">8.9</td>
                       </tr>
                     </tbody>
                   </table>
@@ -346,13 +391,13 @@ export default function StudentDashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
+                    <AlertCircle className="h-5 w-5 mr-2 text-destructive" />
                     Tareas Pendientes
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {studentData.upcomingAssignments.map((assignment, index) => (
-                    <div key={index} className="p-3 border rounded-lg border-red-200">
+                    <div key={index} className="p-3 border rounded-lg border-destructive/30">
                       <div className="flex items-center justify-between">
                         <h4 className="font-medium">{assignment.title}</h4>
                         <Badge
@@ -371,8 +416,8 @@ export default function StudentDashboard() {
                               : "Bajo"}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-600 mt-1">{assignment.subject}</p>
-                      <p className="text-xs text-gray-500 mt-2">Vence: {assignment.dueDate}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{assignment.subject}</p>
+                      <p className="text-xs text-muted-foreground mt-2">Vence: {assignment.dueDate}</p>
                     </div>
                   ))}
                 </CardContent>
@@ -381,26 +426,26 @@ export default function StudentDashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
+                    <CheckCircle className="h-5 w-5 mr-2 text-chart-2" />
                     Tareas Completadas
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="p-3 border rounded-lg border-green-200">
+                  <div className="p-3 border rounded-lg border-primary/20">
                     <div className="flex items-center justify-between">
                       <h4 className="font-medium">Ejercicios de Álgebra</h4>
                       <Badge variant="default">9.5/10</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">Matemáticas</p>
-                    <p className="text-xs text-gray-500 mt-2">Entregado: 2024-01-20</p>
+                    <p className="text-sm text-muted-foreground mt-1">Matemáticas</p>
+                    <p className="text-xs text-muted-foreground mt-2">Entregado: 2024-01-20</p>
                   </div>
-                  <div className="p-3 border rounded-lg border-green-200">
+                  <div className="p-3 border rounded-lg border-primary/20">
                     <div className="flex items-center justify-between">
                       <h4 className="font-medium">Ensayo sobre Células</h4>
                       <Badge variant="default">8.8/10</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">Ciencias</p>
-                    <p className="text-xs text-gray-500 mt-2">Entregado: 2024-01-18</p>
+                    <p className="text-sm text-muted-foreground mt-1">Ciencias</p>
+                    <p className="text-xs text-muted-foreground mt-2">Entregado: 2024-01-18</p>
                   </div>
                 </CardContent>
               </Card>

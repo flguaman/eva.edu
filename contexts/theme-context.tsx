@@ -15,16 +15,28 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("blue")
 
+  const STORAGE_KEY = "edu-theme"
+  const LEGACY_STORAGE_KEY = "eva-theme"
+
   useEffect(() => {
-    const savedTheme = localStorage.getItem("eva-theme") as Theme
+    const savedTheme =
+      (localStorage.getItem(STORAGE_KEY) as Theme) ??
+      (localStorage.getItem(LEGACY_STORAGE_KEY) as Theme)
+
     if (savedTheme) {
       setTheme(savedTheme)
+
+      // Migrate legacy key for users upgrading from EVA to EDU
+      if (localStorage.getItem(LEGACY_STORAGE_KEY) && !localStorage.getItem(STORAGE_KEY)) {
+        localStorage.setItem(STORAGE_KEY, savedTheme)
+      }
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem("eva-theme", theme)
+    localStorage.setItem(STORAGE_KEY, theme)
     document.documentElement.setAttribute("data-theme", theme)
+    document.documentElement.classList.toggle("dark", theme === "dark")
   }, [theme])
 
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>

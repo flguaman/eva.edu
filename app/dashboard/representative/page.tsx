@@ -19,21 +19,21 @@ const RepresentativeDashboard = () => {
     <div className="min-h-screen bg-background">
       {/* Header con botón de logout */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-14 items-center justify-between px-4">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">EVA</span>
-              </div>
-              <span className="font-semibold">Plataforma EVA</span>
+        <div className="container flex h-14 items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">EDU</span>
             </div>
-            <div className="flex items-center gap-2">
-              <ThemeSelector />
-              <Button variant="outline" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Cerrar Sesión
-              </Button>
-            </div>
+            <span className="font-semibold">Plataforma EDU</span>
           </div>
+          <div className="flex items-center gap-2">
+            <ThemeSelector />
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Cerrar Sesión
+            </Button>
+          </div>
+        </div>
       </header>
 
       {/* Dashboard organizado */}
