@@ -39,33 +39,17 @@ interface CalendarEvent {
 }
 
 export function EnhancedCalendar() {
-  // Demo: mostrar marzo 2026 con eventos de ejemplo
-  const demoMonth = new Date(2026, 2, 1); // Marzo 2026
-  const [currentDate, setCurrentDate] = useState(demoMonth);
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("calendar");
 
-  const currentYear = demoMonth.getFullYear();
-  const currentMonth = demoMonth.getMonth();
-
   const [events, setEvents] = useState<CalendarEvent[]>([
     {
       id: "1",
-      title: "Reunión de representantes de curso",
-      description: "Discusión sobre actividades del trimestre",
-      date: new Date(currentYear, currentMonth, 3),
-      time: "15:00",
-      type: "meeting",
-      category: "Reuniones",
-      location: "Sala de profesores",
-      priority: "medium",
-    },
-    {
-      id: "2",
       title: "Pago de mensualidad",
-      description: "Pago correspondiente a marzo 2026",
-      date: new Date(currentYear, currentMonth, 10),
+      description: "Pago correspondiente a enero 2024",
+      date: new Date(2024, 0, 15),
       time: "08:00",
       type: "payment",
       category: "Pagos escolares",
@@ -73,10 +57,21 @@ export function EnhancedCalendar() {
       amount: 150,
     },
     {
+      id: "2",
+      title: "Reunión de representantes de curso",
+      description: "Discusión sobre actividades del trimestre",
+      date: new Date(2024, 0, 20),
+      time: "15:00",
+      type: "meeting",
+      category: "Reuniones",
+      location: "Sala de profesores",
+      priority: "medium",
+    },
+    {
       id: "3",
       title: "Examen de Matemáticas",
       description: "Examen sobre ecuaciones cuadráticas",
-      date: new Date(currentYear, currentMonth, 15),
+      date: new Date(2024, 0, 25),
       time: "08:00",
       type: "academic",
       category: "Exámenes",
@@ -85,24 +80,14 @@ export function EnhancedCalendar() {
     },
     {
       id: "4",
-      title: "Feria de Ciencias",
-      description: "Presentación de proyectos científicos",
-      date: new Date(currentYear, currentMonth, 20),
-      time: "14:00",
-      type: "activity",
-      category: "Actividades",
-      location: "Auditorio Principal",
+      title: "Compra de materiales escolares",
+      description: "Compra de útiles para el trimestre",
+      date: new Date(2024, 0, 10),
+      time: "10:00",
+      type: "payment",
+      category: "Materiales",
       priority: "medium",
-    },
-    {
-      id: "5",
-      title: "Día del Estudiante",
-      description: "Jornada especial para estudiantes",
-      date: new Date(currentYear, currentMonth, 28),
-      time: "Todo el día",
-      type: "holiday",
-      category: "Festivos",
-      priority: "low",
+      amount: 75,
     },
   ]);
 
@@ -195,8 +180,9 @@ export function EnhancedCalendar() {
       days.push(
         <div
           key={day}
-          className={`h-24 p-1 border border-border cursor-pointer hover:bg-secondary/50 transition-colors ${isToday ? "bg-primary/10 border-primary/30" : ""
-            } ${isSelected ? "bg-primary/20 border-primary" : ""}`}
+          className={`h-24 p-1 border border-border cursor-pointer hover:bg-secondary/50 transition-colors ${
+            isToday ? "bg-primary/10 border-primary/30" : ""
+          } ${isSelected ? "bg-primary/20 border-primary" : ""}`}
           onClick={() => setSelectedDate(date)}
         >
           <div className={`text-sm font-medium mb-1 ${isToday ? "text-primary" : ""}`}>{day}</div>
@@ -369,9 +355,10 @@ export function EnhancedCalendar() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {upcomingEvents.map((event) => (
-                    <div key={event.id} className={`p-3 rounded-lg bg-secondary/30 border-l-4 ${event.priority === 'high' ? 'border-l-red-500' :
-                        event.priority === 'medium' ? 'border-l-yellow-500' : 'border-l-green-500'
-                      }`}>
+                    <div key={event.id} className={`p-3 rounded-lg bg-secondary/30 border-l-4 ${
+                      event.priority === 'high' ? 'border-l-red-500' :
+                      event.priority === 'medium' ? 'border-l-yellow-500' : 'border-l-green-500'
+                    }`}>
                       <div className="flex items-start justify-between mb-2">
                         <h4 className="font-medium text-sm">{event.title}</h4>
                         <Badge variant="outline" className={getEventTypeColor(event.type)}>
@@ -492,8 +479,9 @@ export function EnhancedCalendar() {
                   .map((event) => (
                     <div key={event.id} className="flex items-center justify-between p-4 border rounded-lg">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-full ${event.type === 'meeting' ? 'bg-purple-100' : 'bg-orange-100'
-                          }`}>
+                        <div className={`p-2 rounded-full ${
+                          event.type === 'meeting' ? 'bg-purple-100' : 'bg-orange-100'
+                        }`}>
                           {event.type === 'meeting' ? (
                             <Users className="h-4 w-4 text-purple-600" />
                           ) : (

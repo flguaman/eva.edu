@@ -14,6 +14,8 @@ import { AdvancedAnalytics } from "@/components/advanced-analytics"
 import { FloatingNavigation } from "@/components/floating-navigation"
 import { RepresentativeView } from "@/components/representative-view"
 import { ThemeSelector } from "@/components/theme-selector"
+import { LanguageToggle } from "@/components/language-toggle"
+import { LanguageProvider, useLanguage } from "@/contexts/language-context"
 import { useRouter } from "next/navigation"
 import {
   DropdownMenu,
@@ -23,7 +25,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export default function StudentDashboard() {
+function StudentDashboardContent() {
+  const { t } = useLanguage()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState("overview")
 
@@ -32,7 +35,7 @@ export default function StudentDashboard() {
     name: "Freddy Guaman",
     grade: "10mo A",
     studentId: "2024-001",
-    photo: "/placeholder.svg?height=100&width=100&text=MG",
+    photo: "https://www.shutterstock.com/image-photo/multiethnic-student-smiling-confidently-standing-600nw-2687716121.jpg",
     stats: {
       overallAverage: 8.5,
       attendance: 94,
@@ -66,9 +69,15 @@ export default function StudentDashboard() {
   }
 
   const handleLogout = () => {
-    if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+    if (confirm(t("student.logout.confirm"))) {
       router.push("/login")
     }
+  }
+
+  const priorityLabel = (priority: string) => {
+    if (priority === "high") return t("student.priority.high")
+    if (priority === "medium") return t("student.priority.medium")
+    return t("student.priority.low")
   }
 
   return (
@@ -84,7 +93,7 @@ export default function StudentDashboard() {
                 className="w-10 h-10 rounded-full border-2 border-primary/30"
               />
               <div>
-                <h1 className="text-xl font-bold text-primary">¡Hola, {studentData.name}!</h1>
+                <h1 className="text-xl font-bold text-primary">{t("student.greeting")} {studentData.name}!</h1>
                 <p className="text-sm text-muted-foreground">
                   {studentData.grade} • Código: {studentData.studentId}
                 </p>
@@ -100,6 +109,9 @@ export default function StudentDashboard() {
                 )}
               </Button>
 
+              {/* Language Toggle */}
+              <LanguageToggle />
+
               {/* Theme Selector */}
               <ThemeSelector />
 
@@ -113,20 +125,20 @@ export default function StudentDashboard() {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem>
                     <User className="mr-2 h-4 w-4" />
-                    <span>Mi Perfil</span>
+                    <span>{t("student.profile")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Settings className="mr-2 h-4 w-4" />
-                    <span>Configuración</span>
+                    <span>{t("student.settings")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <FileText className="mr-2 h-4 w-4" />
-                    <span>Mis Calificaciones</span>
+                    <span>{t("student.grades")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600">
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Cerrar Sesión</span>
+                    <span>{t("student.logout")}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -142,85 +154,85 @@ export default function StudentDashboard() {
               value="overview"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Resumen
+              {t("student.tab.overview")}
             </TabsTrigger>
             <TabsTrigger
               value="grades"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Calificaciones
+              {t("student.tab.grades")}
             </TabsTrigger>
             <TabsTrigger
               value="assignments"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Tareas
+              {t("student.tab.assignments")}
             </TabsTrigger>
             <TabsTrigger
               value="schedule"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Horario
+              {t("student.tab.schedule")}
             </TabsTrigger>
             <TabsTrigger
               value="library"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Biblioteca
+              {t("student.tab.library")}
             </TabsTrigger>
             <TabsTrigger
               value="analytics"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Análisis
+              {t("student.tab.analytics")}
             </TabsTrigger>
             <TabsTrigger
               value="gamification"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Logros
+              {t("student.tab.gamification")}
             </TabsTrigger>
             <TabsTrigger
               value="chat"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Chat
+              {t("student.tab.chat")}
             </TabsTrigger>
             <TabsTrigger
               value="representative"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Vista Representante
+              {t("student.tab.representative")}
             </TabsTrigger>
           </TabsList>
 
-          {/* Resumen */}
+          {/* ── Overview / Resumen ── */}
           <TabsContent value="overview" className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-semibold text-primary">Promedio General</CardTitle>
+                  <CardTitle className="text-sm font-semibold text-primary">{t("student.stat.average")}</CardTitle>
                   <TrendingUp className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-chart-1">{studentData.stats.overallAverage}/10</div>
-                  <p className="text-xs text-primary/80">Excelente rendimiento</p>
+                  <p className="text-xs text-primary/80">{t("student.stat.average.sub")}</p>
                 </CardContent>
               </Card>
               <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-semibold text-primary">Asistencia</CardTitle>
+                  <CardTitle className="text-sm font-semibold text-primary">{t("student.stat.attendance")}</CardTitle>
                   <CheckCircle className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-chart-2">{studentData.stats.attendance}%</div>
-                  <p className="text-xs text-primary/80">Muy buena asistencia</p>
+                  <p className="text-xs text-primary/80">{t("student.stat.attendance.sub")}</p>
                 </CardContent>
               </Card>
               <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-semibold text-primary">Tareas Completadas</CardTitle>
+                  <CardTitle className="text-sm font-semibold text-primary">{t("student.stat.completed")}</CardTitle>
                   <FileText className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
@@ -228,19 +240,22 @@ export default function StudentDashboard() {
                     {studentData.stats.completedAssignments}/{studentData.stats.totalAssignments}
                   </div>
                   <p className="text-xs text-primary/80">
-                    {Math.round((studentData.stats.completedAssignments / studentData.stats.totalAssignments) * 100)}%
-                    completado
+                    {Math.round((studentData.stats.completedAssignments / studentData.stats.totalAssignments) * 100)}%{" "}
+                    {t("student.stat.completed.sub")}
                   </p>
                 </CardContent>
               </Card>
               <Card className="border-primary/20 hover:shadow-md bg-gradient-to-br from-primary/5 via-transparent to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-semibold text-primary">Ranking</CardTitle>
+                  <CardTitle className="text-sm font-semibold text-primary">{t("student.stat.ranking")}</CardTitle>
                   <Trophy className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-chart-4">#{studentData.stats.ranking}</div>
-                  <p className="text-xs text-primary/80">de {studentData.stats.totalStudents} estudiantes</p>
+                  <p className="text-xs text-primary/80">
+                    {t("student.stat.ranking.sub")} {studentData.stats.totalStudents}{" "}
+                    {t("student.stat.ranking.sub2")}
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -249,8 +264,8 @@ export default function StudentDashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
                 <CardHeader>
-                  <CardTitle className="text-primary">Calificaciones Recientes</CardTitle>
-                  <CardDescription className="text-muted-foreground">Tus últimas evaluaciones</CardDescription>
+                  <CardTitle className="text-primary">{t("student.recent.grades")}</CardTitle>
+                  <CardDescription className="text-muted-foreground">{t("student.recent.grades.desc")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {studentData.recentGrades.map((grade, index) => (
@@ -269,8 +284,8 @@ export default function StudentDashboard() {
 
               <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
                 <CardHeader>
-                  <CardTitle className="text-primary">Próximas Entregas</CardTitle>
-                  <CardDescription className="text-muted-foreground">Tareas y proyectos pendientes</CardDescription>
+                  <CardTitle className="text-primary">{t("student.upcoming")}</CardTitle>
+                  <CardDescription className="text-muted-foreground">{t("student.upcoming.desc")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {studentData.upcomingAssignments.map((assignment, index) => (
@@ -289,11 +304,7 @@ export default function StudentDashboard() {
                                 : "outline"
                           }
                         >
-                          {assignment.priority === "high"
-                            ? "Urgente"
-                            : assignment.priority === "medium"
-                              ? "Medio"
-                              : "Bajo"}
+                          {priorityLabel(assignment.priority)}
                         </Badge>
                         <p className="text-xs text-muted-foreground mt-1">{assignment.dueDate}</p>
                       </div>
@@ -306,8 +317,8 @@ export default function StudentDashboard() {
             {/* Today's Schedule */}
             <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10">
               <CardHeader>
-                <CardTitle className="text-primary">Horario de Hoy</CardTitle>
-                <CardDescription className="text-muted-foreground">Tus clases programadas para hoy</CardDescription>
+                <CardTitle className="text-primary">{t("student.today")}</CardTitle>
+                <CardDescription className="text-muted-foreground">{t("student.today.desc")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -330,49 +341,49 @@ export default function StudentDashboard() {
             </Card>
           </TabsContent>
 
-          {/* Calificaciones */}
+          {/* ── Grades ── */}
           <TabsContent value="grades" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-primary">Mis Calificaciones</CardTitle>
-                <CardDescription>Historial completo de evaluaciones</CardDescription>
+                <CardTitle className="text-primary">{t("grades.title")}</CardTitle>
+                <CardDescription>{t("grades.desc")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse border border-border">
                     <thead>
                       <tr className="bg-primary/10">
-                        <th className="border border-border p-2 text-left text-sm font-semibold text-primary">Materia</th>
-                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Parcial 1</th>
-                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Parcial 2</th>
-                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Tareas</th>
-                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">Promedio</th>
+                        <th className="border border-border p-2 text-left text-sm font-semibold text-primary">{t("grades.col.subject")}</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">{t("grades.col.partial1")}</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">{t("grades.col.partial2")}</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">{t("grades.col.assignments")}</th>
+                        <th className="border border-border p-2 text-center text-sm font-semibold text-primary">{t("grades.col.average")}</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr className="hover:bg-primary/10 transition-colors">
-                        <td className="border border-border p-2">Matemáticas</td>
+                        <td className="border border-border p-2">{t("grades.subject.math")}</td>
                         <td className="border border-border p-2 text-center">9.2</td>
                         <td className="border border-border p-2 text-center">8.8</td>
                         <td className="border border-border p-2 text-center">9.5</td>
                         <td className="border border-border p-2 text-center font-medium">9.2</td>
                       </tr>
                       <tr className="hover:bg-primary/10 transition-colors">
-                        <td className="border border-border p-2">Ciencias</td>
+                        <td className="border border-border p-2">{t("grades.subject.science")}</td>
                         <td className="border border-border p-2 text-center">8.5</td>
                         <td className="border border-border p-2 text-center">9.0</td>
                         <td className="border border-border p-2 text-center">8.8</td>
                         <td className="border border-border p-2 text-center font-medium">8.8</td>
                       </tr>
                       <tr className="hover:bg-primary/10 transition-colors">
-                        <td className="border border-border p-2">Lenguaje</td>
+                        <td className="border border-border p-2">{t("grades.subject.language")}</td>
                         <td className="border border-border p-2 text-center">8.0</td>
                         <td className="border border-border p-2 text-center">8.2</td>
                         <td className="border border-border p-2 text-center">8.1</td>
                         <td className="border border-border p-2 text-center font-medium">8.1</td>
                       </tr>
                       <tr className="hover:bg-primary/10 transition-colors">
-                        <td className="border border-border p-2">Historia</td>
+                        <td className="border border-border p-2">{t("grades.subject.history")}</td>
                         <td className="border border-border p-2 text-center">9.0</td>
                         <td className="border border-border p-2 text-center">8.8</td>
                         <td className="border border-border p-2 text-center">8.9</td>
@@ -385,7 +396,8 @@ export default function StudentDashboard() {
             </Card>
           </TabsContent>
 
-          {/* Tareas */}
+
+          {/* ── Assignments ── */}
           <TabsContent value="assignments" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
@@ -409,11 +421,7 @@ export default function StudentDashboard() {
                                 : "outline"
                           }
                         >
-                          {assignment.priority === "high"
-                            ? "Urgente"
-                            : assignment.priority === "medium"
-                              ? "Medio"
-                              : "Bajo"}
+                          {priorityLabel(assignment.priority)}
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground mt-1">{assignment.subject}</p>
@@ -452,32 +460,32 @@ export default function StudentDashboard() {
             </div>
           </TabsContent>
 
-          {/* Horario */}
+          {/* ── Schedule ── */}
           <TabsContent value="schedule" className="space-y-6">
             <InteractiveCalendar />
           </TabsContent>
 
-          {/* Biblioteca */}
+          {/* ── Library ── */}
           <TabsContent value="library" className="space-y-6">
             <DigitalLibrary />
           </TabsContent>
 
-          {/* Análisis */}
+          {/* ── Analytics ── */}
           <TabsContent value="analytics" className="space-y-6">
             <AdvancedAnalytics />
           </TabsContent>
 
-          {/* Gamificación */}
+          {/* ── Gamification ── */}
           <TabsContent value="gamification" className="space-y-6">
             <GamificationSystem />
           </TabsContent>
 
-          {/* Chat */}
+          {/* ── Chat ── */}
           <TabsContent value="chat" className="space-y-6">
             <RealTimeChat />
           </TabsContent>
 
-          {/* Vista de Representante */}
+          {/* ── Representative ── */}
           <TabsContent value="representative" className="space-y-6">
             <RepresentativeView />
           </TabsContent>
@@ -487,5 +495,13 @@ export default function StudentDashboard() {
       {/* Floating Navigation */}
       <FloatingNavigation />
     </div>
+  )
+}
+
+export default function StudentDashboard() {
+  return (
+    <LanguageProvider>
+      <StudentDashboardContent />
+    </LanguageProvider>
   )
 }

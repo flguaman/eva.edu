@@ -53,16 +53,16 @@ export default function AdminDashboard() {
   ])
 
   return (
-    <div className="min-h-screen bg-background bg-gradient-to-br from-primary/25 via-transparent to-secondary/25">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-card bg-gradient-to-r from-primary/25 via-transparent to-secondary/25 shadow-sm border-b border-primary/40">
+      <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <School className="h-8 w-8 text-primary" />
+              <School className="h-8 w-8 text-blue-600" />
               <div>
-                <h1 className="text-xl font-bold text-foreground">Panel de Administración</h1>
-                <p className="text-sm text-muted-foreground">Colegio Nacional "Simón Bolívar"</p>
+                <h1 className="text-xl font-bold text-gray-900">Panel de Administración</h1>
+                <p className="text-sm text-gray-600">Colegio Nacional "Simón Bolívar"</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -83,49 +83,14 @@ export default function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 bg-primary/10 border border-primary/25 shadow-sm">
-            <TabsTrigger
-              value="overview"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Resumen
-            </TabsTrigger>
-            <TabsTrigger
-              value="students"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Estudiantes
-            </TabsTrigger>
-            <TabsTrigger
-              value="teachers"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Profesores
-            </TabsTrigger>
-            <TabsTrigger
-              value="classes"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Clases
-            </TabsTrigger>
-            <TabsTrigger
-              value="reports"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Reportes
-            </TabsTrigger>
-            <TabsTrigger
-              value="academic"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Académico
-            </TabsTrigger>
-            <TabsTrigger
-              value="settings"
-              className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
-            >
-              Configuración
-            </TabsTrigger>
+          <TabsList className="grid w-full grid-cols-7">
+            <TabsTrigger value="overview">Resumen</TabsTrigger>
+            <TabsTrigger value="students">Estudiantes</TabsTrigger>
+            <TabsTrigger value="teachers">Profesores</TabsTrigger>
+            <TabsTrigger value="classes">Clases</TabsTrigger>
+            <TabsTrigger value="reports">Reportes</TabsTrigger>
+            <TabsTrigger value="academic">Académico</TabsTrigger>
+            <TabsTrigger value="settings">Configuración</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -137,7 +102,7 @@ export default function AdminDashboard() {
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-primary">{stats.totalStudents}</div>
+                  <div className="text-2xl font-bold text-blue-600">{stats.totalStudents}</div>
                   <p className="text-xs text-muted-foreground">+12 este mes</p>
                 </CardContent>
               </Card>
@@ -147,7 +112,7 @@ export default function AdminDashboard() {
                   <GraduationCap className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-secondary">{stats.totalTeachers}</div>
+                  <div className="text-2xl font-bold text-green-600">{stats.totalTeachers}</div>
                   <p className="text-xs text-muted-foreground">+2 este mes</p>
                 </CardContent>
               </Card>
@@ -157,7 +122,7 @@ export default function AdminDashboard() {
                   <BookOpen className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-accent">{stats.totalClasses}</div>
+                  <div className="text-2xl font-bold text-purple-600">{stats.totalClasses}</div>
                   <p className="text-xs text-muted-foreground">En 3 niveles</p>
                 </CardContent>
               </Card>
@@ -167,7 +132,7 @@ export default function AdminDashboard() {
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-primary">{stats.averageGrade}</div>
+                  <div className="text-2xl font-bold text-orange-600">{stats.averageGrade}</div>
                   <p className="text-xs text-muted-foreground">+0.2 desde el mes pasado</p>
                 </CardContent>
               </Card>
@@ -184,11 +149,11 @@ export default function AdminDashboard() {
                   {recentActivity.map((activity) => (
                     <div key={activity.id} className="flex items-start space-x-3">
                       <div className="flex-shrink-0">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                        <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-medium">{activity.action}</p>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-gray-500">
                           {activity.user} • {activity.time}
                         </p>
                       </div>
@@ -256,30 +221,30 @@ export default function AdminDashboard() {
                     </select>
                   </div>
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse border border-border">
+                    <table className="w-full border-collapse border border-gray-300">
                       <thead>
-                        <tr className="bg-muted">
-                          <th className="border border-border p-3 text-left text-muted-foreground">Nombre</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Grado</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Promedio</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Asistencia</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Estado</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Acciones</th>
+                        <tr className="bg-gray-50">
+                          <th className="border border-gray-300 p-3 text-left">Nombre</th>
+                          <th className="border border-gray-300 p-3 text-center">Grado</th>
+                          <th className="border border-gray-300 p-3 text-center">Promedio</th>
+                          <th className="border border-gray-300 p-3 text-center">Asistencia</th>
+                          <th className="border border-gray-300 p-3 text-center">Estado</th>
+                          <th className="border border-gray-300 p-3 text-center">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
                         {students.map((student) => (
                           <tr key={student.id}>
-                            <td className="border border-border p-3">{student.name}</td>
-                            <td className="border border-border p-3 text-center">{student.grade}</td>
-                            <td className="border border-border p-3 text-center">{student.average}</td>
-                            <td className="border border-border p-3 text-center">{student.attendance}%</td>
-                            <td className="border border-border p-3 text-center">
+                            <td className="border border-gray-300 p-3">{student.name}</td>
+                            <td className="border border-gray-300 p-3 text-center">{student.grade}</td>
+                            <td className="border border-gray-300 p-3 text-center">{student.average}</td>
+                            <td className="border border-gray-300 p-3 text-center">{student.attendance}%</td>
+                            <td className="border border-gray-300 p-3 text-center">
                               <Badge variant={student.status === "active" ? "default" : "destructive"}>
                                 {student.status === "active" ? "Activo" : "Alerta"}
                               </Badge>
                             </td>
-                            <td className="border border-border p-3 text-center">
+                            <td className="border border-gray-300 p-3 text-center">
                               <div className="flex justify-center space-x-2">
                                 <Button size="sm" variant="outline">
                                   <Eye className="h-4 w-4" />
@@ -335,30 +300,30 @@ export default function AdminDashboard() {
                     </select>
                   </div>
                   <div className="overflow-x-auto">
-                    <table className="w-full border-collapse border border-border">
+                    <table className="w-full border-collapse border border-gray-300">
                       <thead>
-                        <tr className="bg-muted">
-                          <th className="border border-border p-3 text-left text-muted-foreground">Nombre</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Materia</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Clases</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Estudiantes</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Estado</th>
-                          <th className="border border-border p-3 text-center text-muted-foreground">Acciones</th>
+                        <tr className="bg-gray-50">
+                          <th className="border border-gray-300 p-3 text-left">Nombre</th>
+                          <th className="border border-gray-300 p-3 text-center">Materia</th>
+                          <th className="border border-gray-300 p-3 text-center">Clases</th>
+                          <th className="border border-gray-300 p-3 text-center">Estudiantes</th>
+                          <th className="border border-gray-300 p-3 text-center">Estado</th>
+                          <th className="border border-gray-300 p-3 text-center">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
                         {teachers.map((teacher) => (
                           <tr key={teacher.id}>
-                            <td className="border border-border p-3">{teacher.name}</td>
-                            <td className="border border-border p-3 text-center">{teacher.subject}</td>
-                            <td className="border border-border p-3 text-center">{teacher.classes}</td>
-                            <td className="border border-border p-3 text-center">{teacher.students}</td>
-                            <td className="border border-border p-3 text-center">
+                            <td className="border border-gray-300 p-3">{teacher.name}</td>
+                            <td className="border border-gray-300 p-3 text-center">{teacher.subject}</td>
+                            <td className="border border-gray-300 p-3 text-center">{teacher.classes}</td>
+                            <td className="border border-gray-300 p-3 text-center">{teacher.students}</td>
+                            <td className="border border-gray-300 p-3 text-center">
                               <Badge variant={teacher.status === "active" ? "default" : "secondary"}>
                                 {teacher.status === "active" ? "Activo" : "Inactivo"}
                               </Badge>
                             </td>
-                            <td className="border border-border p-3 text-center">
+                            <td className="border border-gray-300 p-3 text-center">
                               <div className="flex justify-center space-x-2">
                                 <Button size="sm" variant="outline">
                                   <Eye className="h-4 w-4" />
@@ -400,15 +365,15 @@ export default function AdminDashboard() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm">8vo A</span>
-                      <span className="text-sm text-muted-foreground">32 estudiantes</span>
+                      <span className="text-sm text-gray-500">32 estudiantes</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">8vo B</span>
-                      <span className="text-sm text-muted-foreground">30 estudiantes</span>
+                      <span className="text-sm text-gray-500">30 estudiantes</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">8vo C</span>
-                      <span className="text-sm text-muted-foreground">28 estudiantes</span>
+                      <span className="text-sm text-gray-500">28 estudiantes</span>
                     </div>
                   </div>
                 </CardContent>
@@ -423,15 +388,15 @@ export default function AdminDashboard() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm">9no A</span>
-                      <span className="text-sm text-muted-foreground">29 estudiantes</span>
+                      <span className="text-sm text-gray-500">29 estudiantes</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">9no B</span>
-                      <span className="text-sm text-muted-foreground">31 estudiantes</span>
+                      <span className="text-sm text-gray-500">31 estudiantes</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">9no C</span>
-                      <span className="text-sm text-muted-foreground">27 estudiantes</span>
+                      <span className="text-sm text-gray-500">27 estudiantes</span>
                     </div>
                   </div>
                 </CardContent>
@@ -446,15 +411,15 @@ export default function AdminDashboard() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-sm">10mo A</span>
-                      <span className="text-sm text-muted-foreground">28 estudiantes</span>
+                      <span className="text-sm text-gray-500">28 estudiantes</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">10mo B</span>
-                      <span className="text-sm text-muted-foreground">26 estudiantes</span>
+                      <span className="text-sm text-gray-500">26 estudiantes</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">10mo C</span>
-                      <span className="text-sm text-muted-foreground">30 estudiantes</span>
+                      <span className="text-sm text-gray-500">30 estudiantes</span>
                     </div>
                   </div>
                 </CardContent>

@@ -25,6 +25,8 @@ import {
 import { StudentReportsGenerator } from "@/components/student-reports-generator"
 import { InteractiveCalendar } from "@/components/interactive-calendar"
 import { ThemeSelector } from "@/components/theme-selector"
+import { LanguageToggle } from "@/components/language-toggle"
+import { LanguageProvider, useLanguage } from "@/contexts/language-context"
 import { useRouter } from "next/navigation"
 import {
   DropdownMenu,
@@ -34,7 +36,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export default function TeacherDashboard() {
+function TeacherDashboardContent() {
+  const { t } = useLanguage()
   const router = useRouter()
 
   const [classes] = useState([
@@ -57,8 +60,7 @@ export default function TeacherDashboard() {
   ])
 
   const handleLogout = () => {
-    // Aquí podrías agregar lógica de logout como limpiar tokens, etc.
-    if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+    if (confirm(t("teacher.logout.confirm"))) {
       router.push("/login")
     }
   }
@@ -70,16 +72,23 @@ export default function TeacherDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <BookOpen className="h-8 w-8 text-primary" />
+              <img
+                src="https://img.freepik.com/foto-gratis/seguro-maestro-mediana-edad-sienta-mesa-utiles-escolares-sosteniendo-libro-aula_141793-119837.jpg?semt=ais_hybrid&w=740&q=80"
+                alt="Prof. Roberto García"
+                className="w-10 h-10 rounded-full border-2 border-primary/30 object-cover"
+              />
               <div>
-                <h1 className="text-xl font-bold text-foreground">Panel del Profesor</h1>
-                <p className="text-sm text-muted-foreground">Prof. Roberto García - Matemáticas</p>
+                <h1 className="text-xl font-bold text-foreground">{t("teacher.panel")}</h1>
+                <p className="text-sm text-muted-foreground">{t("teacher.subtitle")}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon">
                 <Bell className="h-5 w-5" />
               </Button>
+
+              {/* Language Toggle */}
+              <LanguageToggle />
 
               {/* Theme Selector */}
               <ThemeSelector />
@@ -94,20 +103,20 @@ export default function TeacherDashboard() {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem>
                     <User className="mr-2 h-4 w-4" />
-                    <span>Mi Perfil</span>
+                    <span>{t("teacher.profile")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <FileText className="mr-2 h-4 w-4" />
-                    <span>Mis Reportes</span>
+                    <span>{t("teacher.reports")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Calendar className="mr-2 h-4 w-4" />
-                    <span>Mi Horario</span>
+                    <span>{t("teacher.schedule")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600">
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Cerrar Sesión</span>
+                    <span>{t("teacher.logout")}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -123,87 +132,88 @@ export default function TeacherDashboard() {
               value="overview"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Resumen
+              {t("teacher.tab.overview")}
             </TabsTrigger>
             <TabsTrigger
               value="classes"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Clases
+              {t("teacher.tab.classes")}
             </TabsTrigger>
             <TabsTrigger
               value="assignments"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Tareas
+              {t("teacher.tab.assignments")}
             </TabsTrigger>
             <TabsTrigger
               value="grades"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Calificaciones
+              {t("teacher.tab.grades")}
             </TabsTrigger>
             <TabsTrigger
               value="resources"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Recursos
+              {t("teacher.tab.resources")}
             </TabsTrigger>
             <TabsTrigger
               value="schedule"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Horario
+              {t("teacher.tab.schedule")}
             </TabsTrigger>
             <TabsTrigger
               value="reports"
               className="data-[state=active]:bg-primary/25 data-[state=active]:text-primary data-[state=active]:shadow"
             >
-              Reportes
+              {t("teacher.tab.reports")}
             </TabsTrigger>
           </TabsList>
 
+          {/* ── Overview ── */}
           <TabsContent value="overview" className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Estudiantes</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t("teacher.stat.students")}</CardTitle>
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-primary">83</div>
-                  <p className="text-xs text-muted-foreground">En 3 cursos</p>
+                  <p className="text-xs text-muted-foreground">{t("teacher.stat.students.sub")}</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Tareas Pendientes</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t("teacher.stat.pending")}</CardTitle>
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-secondary">12</div>
-                  <p className="text-xs text-muted-foreground">Por revisar</p>
+                  <p className="text-xs text-muted-foreground">{t("teacher.stat.pending.sub")}</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Promedio General</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t("teacher.stat.average")}</CardTitle>
                   <BookOpen className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-accent">8.4</div>
-                  <p className="text-xs text-muted-foreground">Todos los cursos</p>
+                  <p className="text-xs text-muted-foreground">{t("teacher.stat.average.sub")}</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Próxima Clase</CardTitle>
+                  <CardTitle className="text-sm font-medium">{t("teacher.stat.next")}</CardTitle>
                   <Calendar className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-primary">10mo A</div>
-                  <p className="text-xs text-muted-foreground">En 2 horas</p>
+                  <p className="text-xs text-muted-foreground">{t("teacher.stat.next.sub")}</p>
                 </CardContent>
               </Card>
             </div>
@@ -212,8 +222,8 @@ export default function TeacherDashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Tareas Recientes</CardTitle>
-                  <CardDescription>Estado de entrega de tareas asignadas</CardDescription>
+                  <CardTitle>{t("teacher.recent.assignments")}</CardTitle>
+                  <CardDescription>{t("teacher.recent.assignments.desc")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {assignments.map((assignment) => (
@@ -226,7 +236,7 @@ export default function TeacherDashboard() {
                         <Badge variant="secondary">
                           {assignment.submitted}/{assignment.total}
                         </Badge>
-                        <p className="text-xs text-muted-foreground mt-1">Vence: {assignment.dueDate}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t("teacher.due")} {assignment.dueDate}</p>
                       </div>
                     </div>
                   ))}
@@ -235,8 +245,8 @@ export default function TeacherDashboard() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Calificaciones Recientes</CardTitle>
-                  <CardDescription>Últimas calificaciones ingresadas</CardDescription>
+                  <CardTitle>{t("teacher.recent.grades")}</CardTitle>
+                  <CardDescription>{t("teacher.recent.grades.desc")}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {recentGrades.map((grade, index) => (
@@ -257,6 +267,7 @@ export default function TeacherDashboard() {
             </div>
           </TabsContent>
 
+          {/* ── Classes ── */}
           <TabsContent value="classes" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold">Mis Clases</h2>
@@ -296,6 +307,7 @@ export default function TeacherDashboard() {
             </div>
           </TabsContent>
 
+          {/* ── Assignments ── */}
           <TabsContent value="assignments" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold">Gestión de Tareas</h2>
@@ -388,6 +400,7 @@ export default function TeacherDashboard() {
             </Card>
           </TabsContent>
 
+          {/* ── Grades ── */}
           <TabsContent value="grades" className="space-y-6">
             <Card>
               <CardHeader>
@@ -444,6 +457,7 @@ export default function TeacherDashboard() {
             </Card>
           </TabsContent>
 
+          {/* ── Resources ── */}
           <TabsContent value="resources" className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold">Recursos Educativos</h2>
@@ -525,15 +539,25 @@ export default function TeacherDashboard() {
             </div>
           </TabsContent>
 
+          {/* ── Schedule ── */}
           <TabsContent value="schedule" className="space-y-6">
             <InteractiveCalendar />
           </TabsContent>
 
+          {/* ── Reports ── */}
           <TabsContent value="reports" className="space-y-6">
             <StudentReportsGenerator />
           </TabsContent>
         </Tabs>
       </div>
     </div>
+  )
+}
+
+export default function TeacherDashboard() {
+  return (
+    <LanguageProvider>
+      <TeacherDashboardContent />
+    </LanguageProvider>
   )
 }
